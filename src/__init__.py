@@ -1,8 +1,8 @@
 import os
 from flask import Flask
 
-DATABASE_URL = os.getenv('DATABASE_URL', 'sqlite:///users.db') if os.environ.get(
-    'DATABASE_URL') != 'default' else 'sqlite:///users.db'
+DATABASE_URL = os.getenv('DATABASE_URL', 'sqlite:///aspirant.db') if os.environ.get(
+    'DATABASE_URL') != 'default' else 'sqlite:///aspirant.db'
 
 
 def create_app(config_name):

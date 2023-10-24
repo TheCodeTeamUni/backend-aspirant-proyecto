@@ -3,7 +3,7 @@ from flask_cors import CORS
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from src.models import db
-from src.views import ViewUsers, VistaSignUp, VistaPong, VistaLogin, VistaUser, VistaValidateEmail
+from src.views import VistaPong
 
 application = create_app('default')
 app_context = application.app_context()
