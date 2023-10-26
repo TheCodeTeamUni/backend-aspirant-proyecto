@@ -72,11 +72,12 @@ class TestPersonalInformation(TestCase):
             "address": self.data_factory.address(),
             "birthdate": '13/05/1992',
             "description": self.data_factory.text(),
-            "photo": self.data_factory.image_url()}
+            "photo": self.data_factory.image_url()
+        }
 
         postPersonal = self.client.post(
             "/aspirant/personal", json=new_personal, headers={"Content-Type": "application/json"})
-        
+
         response = json.loads(postPersonal.get_data())
 
         self.assertEqual(response["id"], 2)
@@ -92,9 +93,8 @@ class TestPersonalInformation(TestCase):
 
         postPersonal = self.client.post(
             "/aspirant/personal", json=new_personal, headers={"Content-Type": "application/json"})
-        
-        self.assertEqual(postPersonal.status_code, 400)
 
+        self.assertEqual(postPersonal.status_code, 400)
 
     def test_ping_aspirant(self):
 

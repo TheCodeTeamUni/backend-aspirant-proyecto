@@ -10,7 +10,7 @@
 
 ## Create image users
 1. Create image users: `docker build -t aspirant_app .`
-2. Create and run container: `docker run -d -p 3002:3002 -e DATABASE_URL=postgresql://postgres:admin@host.docker.internal:5432/postgres aspirant_app`
+2. Create and run container: `docker run -d -p 3002:3002 -e DATABASE_URL_ASPIRANT=postgresql://postgres:admin@host.docker.internal:5432/postgres aspirant_app`
 
 ## Run Unittest
 1. To run all test: `python -m unittest discover -s test -v`
