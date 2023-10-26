@@ -1,31 +1,34 @@
 from marshmallow_sqlalchemy import SQLAlchemySchema
 from marshmallow import fields
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
 
 class PersonalInformation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), nullable=False)
-    email = db.Column(db.String(128), nullable=False)
-    password = db.Column(db.String(256), nullable=False)
-    salt = db.Column(db.String(50), nullable=False)
-    type = db.Column(db.String(2), nullable=False)
-    token = db.Column(db.String(300))
-    expireAt = db.Column(db.DateTime)
+    idUser = db.Column(db.Integer, nullable=False, unique=True)
+    name = db.Column(db.String(50))
+    lastName = db.Column(db.String(128))
+    typeDocument = db.Column(db.String(20))
+    document = db.Column(db.String(50))
+    gender = db.Column(db.String(10))
+    alterntiveEmail = db.Column(db.String(128))
+    telephone = db.Column(db.String(50))
+    country = db.Column(db.String(50))
+    address = db.Column(db.String(128))
+    birthdate = db.Column(db.DateTime)
+    description = db.Column(db.String)
+    photo = db.Column(db.String)
     createdAt = db.Column(db.DateTime, default=datetime.now())
 
 
 class PersonalSchema(SQLAlchemySchema):
     class Meta:
         model = PersonalInformation
-        include_relationships = True
-        include_fk = True
         load_instance = True
 
     id = fields.Integer()
-    username = fields.String()
-    email = fields.String()
-    type = fields.String()
+    idUser = fields.Integer()
+    createdAt = fields.DateTime()
