@@ -7,6 +7,7 @@
 4. You can now install packages and run your Python code within the virtual environment.
 5. To install requirements, type `python -m pip install -r requirements.txt`
 6. To deactivate the virtual enviroment, type `deactivate`
+
 ## Create image users
 1. Create image users: `docker build -t aspirant_app .`
 2. Create and run container: `docker run -d -p 3002:3002 -e DATABASE_URL=postgresql://postgres:admin@host.docker.internal:5432/postgres aspirant_app`
