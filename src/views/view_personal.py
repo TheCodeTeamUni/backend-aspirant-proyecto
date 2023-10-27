@@ -33,4 +33,4 @@ class VistaPong(Resource):
 
     def get(self):
         # Retorna pong si el servicio se encuentra en linea: /
-        return 'pong users', 200
+        return 'pong aspirantes', 200
