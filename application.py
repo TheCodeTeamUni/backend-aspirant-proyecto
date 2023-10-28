@@ -4,6 +4,7 @@ from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from src.models import db
 from src.views import VistaPong, VistaPersonal
+from src.views import VistaWorkExperience
 
 application = create_app('default')
 app_context = application.app_context()
@@ -15,6 +16,7 @@ db.create_all()
 cors = CORS(application)
 
 api = Api(application)
+api.add_resource(VistaWorkExperience, '/aspirant/work')
 api.add_resource(VistaPersonal, '/aspirant/personal')
 api.add_resource(VistaPong, '/')
 
