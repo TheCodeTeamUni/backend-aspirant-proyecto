@@ -1,7 +1,6 @@
-import uuid
 from flask_restful import Resource
 from flask import request
-from datetime import datetime, timedelta
+from datetime import datetime
 from ..models import db, PersonalInformation, PersonalSchema
 
 personal_schema = PersonalSchema()
