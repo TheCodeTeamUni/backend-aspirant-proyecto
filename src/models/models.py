@@ -32,7 +32,6 @@ class WorkExperience(db.Model):
     actualJob = db.Column(db.Boolean)
     startDate = db.Column(db.DateTime)
     endDate = db.Column(db.DateTime)
-    description = db.Column(db.String)
     createdAt = db.Column(db.DateTime, default=datetime.now())
 
 
