@@ -5,6 +5,7 @@ from ..models import db, WorkExperience, WorkExperienceSchema
 
 work_schema = WorkExperienceSchema()
 
+
 class VistaWorkExperience(Resource):
 
     def post(self):
