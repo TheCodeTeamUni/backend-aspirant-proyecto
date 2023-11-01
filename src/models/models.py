@@ -44,6 +44,19 @@ class Skill(db.Model):
     createdAt = db.Column(db.DateTime, default=datetime.now)
 
 
+class Education(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    idUser = db.Column(db.Integer, nullable=False)
+    typeEducation = db.Column(db.String(128))
+    level = db.Column(db.String(128))
+    title = db.Column(db.String(256))
+    grade = db.Column(db.Boolean)
+    institution = db.Column(db.String(256))
+    startDate = db.Column(db.DateTime)
+    endDate = db.Column(db.DateTime)
+    createdAt = db.Column(db.DateTime, default=datetime.now)
+
+
 class PersonalSchema(SQLAlchemySchema):
     class Meta:
         model = PersonalInformation
@@ -82,3 +95,13 @@ class SkillDetailSchema(SQLAlchemySchema):
     skill = fields.String()
     level = fields.Integer()
     experience = fields.String()
+
+
+class EducationSchema(SQLAlchemySchema):
+    class Meta:
+        model = Education
+        load_instance = True
+
+    id = fields.Integer()
+    idUser = fields.Integer()
+    createdAt = fields.DateTime()
