@@ -35,6 +35,15 @@ class WorkExperience(db.Model):
     createdAt = db.Column(db.DateTime, default=datetime.now())
 
 
+class Skill(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    idUser = db.Column(db.Integer, nullable=False)
+    skill = db.Column(db.String(128))
+    level = db.Column(db.Integer)
+    experience = db.Column(db.String(128))
+    createdAt = db.Column(db.DateTime, default=datetime.now())
+
+
 class PersonalSchema(SQLAlchemySchema):
     class Meta:
         model = PersonalInformation
@@ -48,6 +57,16 @@ class PersonalSchema(SQLAlchemySchema):
 class WorkExperienceSchema(SQLAlchemySchema):
     class Meta:
         model = WorkExperience
+        load_instance = True
+
+    id = fields.Integer()
+    idUser = fields.Integer()
+    createdAt = fields.DateTime()
+
+
+class SkillSchema(SQLAlchemySchema):
+    class Meta:
+        model = Skill
         load_instance = True
 
     id = fields.Integer()

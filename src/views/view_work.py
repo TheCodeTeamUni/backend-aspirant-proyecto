@@ -9,14 +9,15 @@ work_schema = WorkExperienceSchema()
 class VistaWorkExperience(Resource):
 
     def post(self):
-        # Crea la informacion personal del aspirante: /aspirant/work
+        # Crea la información laboral del aspirante: /aspirant/work
 
         try:
             work = request.get_json()
             work['startDate'] = datetime.strptime(
                 work['startDate'], '%d/%m/%Y')
-            work['endDate'] = datetime.strptime(
-                work['endDate'], '%d/%m/%Y')
+            if work['actualJob'] == False:
+                work['endDate'] = datetime.strptime(
+                    work['endDate'], '%d/%m/%Y')
             work = WorkExperience(**work)
 
             # Save the information for the aspirant
