@@ -19,7 +19,7 @@ cors = CORS(application)
 api = Api(application)
 api.add_resource(VistaWorkExperience, '/aspirant/work')
 api.add_resource(VistaPersonal, '/aspirant/personal')
-api.add_resource(VistaSkill, '/aspirant/skill')
+api.add_resource(VistaSkill, '/aspirant/skill/<int:idUser>')
 api.add_resource(VistaPong, '/')
 
 jwt = JWTManager(application)

@@ -41,7 +41,7 @@ class Skill(db.Model):
     skill = db.Column(db.String(128))
     level = db.Column(db.Integer)
     experience = db.Column(db.String(128))
-    createdAt = db.Column(db.DateTime, default=datetime.now())
+    createdAt = db.Column(db.DateTime, default=datetime.now)
 
 
 class PersonalSchema(SQLAlchemySchema):
@@ -72,3 +72,13 @@ class SkillSchema(SQLAlchemySchema):
     id = fields.Integer()
     idUser = fields.Integer()
     createdAt = fields.DateTime()
+
+
+class SkillDetailSchema(SQLAlchemySchema):
+    class Meta:
+        model = Skill
+        load_instance = True
+
+    skill = fields.String()
+    level = fields.Integer()
+    experience = fields.String()
