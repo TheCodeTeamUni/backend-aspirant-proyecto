@@ -105,3 +105,17 @@ class EducationSchema(SQLAlchemySchema):
     id = fields.Integer()
     idUser = fields.Integer()
     createdAt = fields.DateTime()
+
+
+class EducationDetailSchema(SQLAlchemySchema):
+    class Meta:
+        model = Education
+        load_instance = True
+
+    typeEducation = fields.String()
+    level = fields.String()
+    title = fields.String()
+    grade = fields.Boolean()
+    institution = fields.String()
+    startDate = fields.DateTime()
+    endDate = fields.DateTime()
