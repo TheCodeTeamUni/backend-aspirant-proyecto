@@ -16,7 +16,6 @@ class VistaSkill(Resource):
             skill['idUser'] = idUser
             skill = Skill(**skill)
 
-            # Save the information for the aspirant
             db.session.add(skill)
             db.session.commit()
 

@@ -39,7 +39,7 @@ class Skill(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     idUser = db.Column(db.Integer, nullable=False)
     skill = db.Column(db.String(128))
-    level = db.Column(db.Integer)
+    level = db.Column(db.Float)
     experience = db.Column(db.String(128))
     createdAt = db.Column(db.DateTime, default=datetime.now)
 
