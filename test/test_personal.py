@@ -10,7 +10,6 @@ class TestPersonalInformation(TestCase):
     def setUp(self):
         self.data_factory = Faker()
         self.client = app.test_client()
-        self.userId = 1
         self.name = self.data_factory.name()
         self.lastName = self.data_factory.last_name()
         self.typeDocument = self.data_factory.random_element(
@@ -27,7 +26,6 @@ class TestPersonalInformation(TestCase):
         self.photo = self.data_factory.image_url()
 
         new_personal = {
-            "idUser": self.userId,
             "name": self.name,
             "lastName": self.lastName,
             "typeDocument": self.typeDocument,
@@ -41,13 +39,8 @@ class TestPersonalInformation(TestCase):
             "description": self.description,
             "photo": self.photo}
 
-        postPersonal = self.client.post(
-            "/aspirant/personal", json=new_personal, headers={"Content-Type": "application/json"})
-
-        response = json.loads(postPersonal.get_data())
-
-        self.user_personalId = response['id']
-        self.user_idUser = response['idUser']
+        self.client.post(
+            "/aspirant/personal/1", json=new_personal, headers={"Content-Type": "application/json"})
 
     def tearDown(self):
 
@@ -60,7 +53,6 @@ class TestPersonalInformation(TestCase):
     def test_create_personal_information(self):
 
         new_personal = {
-            "idUser": 2,
             "name": self.data_factory.name(),
             "lastName": self.data_factory.last_name(),
             "typeDocument": self.data_factory.random_element(elements=('CC', 'TI', 'CE')),
@@ -76,7 +68,7 @@ class TestPersonalInformation(TestCase):
         }
 
         postPersonal = self.client.post(
-            "/aspirant/personal", json=new_personal, headers={"Content-Type": "application/json"})
+            "/aspirant/personal/2", json=new_personal, headers={"Content-Type": "application/json"})
 
         response = json.loads(postPersonal.get_data())
 
@@ -92,9 +84,18 @@ class TestPersonalInformation(TestCase):
             "photo": self.data_factory.image_url()}
 
         postPersonal = self.client.post(
-            "/aspirant/personal", json=new_personal, headers={"Content-Type": "application/json"})
+            "/aspirant/personal/2", json=new_personal, headers={"Content-Type": "application/json"})
 
         self.assertEqual(postPersonal.status_code, 400)
+
+    def test_get_personal_information(self):
+
+        getPersonal = self.client.get("/aspirant/personal/1")
+
+        response = json.loads(getPersonal.get_data())
+
+        self.assertEqual(getPersonal.status_code, 200)
+        self.assertEqual(response["name"], self.name)
 
     def test_ping_aspirant(self):
 
