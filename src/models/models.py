@@ -67,6 +67,26 @@ class PersonalSchema(SQLAlchemySchema):
     createdAt = fields.DateTime()
 
 
+class PersonalDetailSchema(SQLAlchemySchema):
+
+    class Meta:
+        model = PersonalInformation
+        load_instance = True
+
+    name = fields.String()
+    lastName = fields.String()
+    typeDocument = fields.String()
+    document = fields.String()
+    gender = fields.String()
+    alterntiveEmail = fields.String()
+    telephone = fields.String()
+    country = fields.String()
+    address = fields.String()
+    birthdate = fields.DateTime()
+    description = fields.String()
+    photo = fields.String()
+
+
 class WorkExperienceSchema(SQLAlchemySchema):
     class Meta:
         model = WorkExperience
@@ -75,6 +95,18 @@ class WorkExperienceSchema(SQLAlchemySchema):
     id = fields.Integer()
     idUser = fields.Integer()
     createdAt = fields.DateTime()
+
+
+class WorkExperienceDetailSchema(SQLAlchemySchema):
+    class Meta:
+        model = WorkExperience
+        load_instance = True
+
+    company = fields.String()
+    position = fields.String()
+    actualJob = fields.Boolean()
+    startDate = fields.DateTime()
+    endDate = fields.DateTime()
 
 
 class SkillSchema(SQLAlchemySchema):
