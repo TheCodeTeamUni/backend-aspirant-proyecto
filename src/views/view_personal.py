@@ -25,7 +25,6 @@ class VistaPersonal(Resource):
 
         except Exception as error:
             db.session.rollback()
-            print(error, datetime.now)
             return {'error': 'A ocurrido un error'}, 400
 
 
