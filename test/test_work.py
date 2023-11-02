@@ -21,7 +21,6 @@ class TestPersonalInformation(TestCase):
 
     def test_create_work_experience(self):
         new_work = {
-            "idUser": 1,
             "company": self.data_factory.company(),
             "position": self.data_factory.job(),
             "actualJob": False,
@@ -30,7 +29,7 @@ class TestPersonalInformation(TestCase):
         }
 
         postWork = self.client.post(
-            "/aspirant/work", json=new_work, headers={"Content-Type": "application/json"})
+            "/aspirant/work/1", json=new_work, headers={"Content-Type": "application/json"})
 
         response = json.loads(postWork.get_data())
 
@@ -39,7 +38,6 @@ class TestPersonalInformation(TestCase):
 
     def test_create_work_experience_with_bad_data(self):
         new_work = {
-            "idUser": 1,
             "company": self.data_factory.company(),
             "position": self.data_factory.job(),
             "actualJob": False,
@@ -48,6 +46,27 @@ class TestPersonalInformation(TestCase):
         }
 
         postWork = self.client.post(
-            "/aspirant/work", json=new_work, headers={"Content-Type": "application/json"})
+            "/aspirant/work/1", json=new_work, headers={"Content-Type": "application/json"})
 
         self.assertEqual(postWork.status_code, 400)
+
+    def test_get_work_experience(self):
+        new_work = {
+            "company": 'Company Test',
+            "position": self.data_factory.job(),
+            "actualJob": False,
+            "startDate": '01/01/2010',
+            "endDate": '01/01/2012'
+        }
+
+        self.client.post(
+            "/aspirant/work/1", json=new_work, headers={"Content-Type": "application/json"})
+
+        getWork = self.client.get(
+            "/aspirant/work/1", headers={"Content-Type": "application/json"})
+
+        response = json.loads(getWork.get_data())
+
+        self.assertEqual(getWork.status_code, 200)
+        self.assertEqual(len(response), 1)
+        self.assertEqual(response[0]['company'], 'Company Test')
