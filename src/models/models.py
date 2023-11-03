@@ -35,6 +35,28 @@ class WorkExperience(db.Model):
     createdAt = db.Column(db.DateTime, default=datetime.now())
 
 
+class Skill(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    idUser = db.Column(db.Integer, nullable=False)
+    skill = db.Column(db.String(128))
+    level = db.Column(db.Float)
+    experience = db.Column(db.String(128))
+    createdAt = db.Column(db.DateTime, default=datetime.now)
+
+
+class Education(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    idUser = db.Column(db.Integer, nullable=False)
+    typeEducation = db.Column(db.String(128))
+    level = db.Column(db.String(128))
+    title = db.Column(db.String(256))
+    grade = db.Column(db.Boolean)
+    institution = db.Column(db.String(256))
+    startDate = db.Column(db.DateTime)
+    endDate = db.Column(db.DateTime)
+    createdAt = db.Column(db.DateTime, default=datetime.now)
+
+
 class PersonalSchema(SQLAlchemySchema):
     class Meta:
         model = PersonalInformation
@@ -45,6 +67,26 @@ class PersonalSchema(SQLAlchemySchema):
     createdAt = fields.DateTime()
 
 
+class PersonalDetailSchema(SQLAlchemySchema):
+
+    class Meta:
+        model = PersonalInformation
+        load_instance = True
+
+    name = fields.String()
+    lastName = fields.String()
+    typeDocument = fields.String()
+    document = fields.String()
+    gender = fields.String()
+    alterntiveEmail = fields.String()
+    telephone = fields.String()
+    country = fields.String()
+    address = fields.String()
+    birthdate = fields.DateTime()
+    description = fields.String()
+    photo = fields.String()
+
+
 class WorkExperienceSchema(SQLAlchemySchema):
     class Meta:
         model = WorkExperience
@@ -53,3 +95,59 @@ class WorkExperienceSchema(SQLAlchemySchema):
     id = fields.Integer()
     idUser = fields.Integer()
     createdAt = fields.DateTime()
+
+
+class WorkExperienceDetailSchema(SQLAlchemySchema):
+    class Meta:
+        model = WorkExperience
+        load_instance = True
+
+    company = fields.String()
+    position = fields.String()
+    actualJob = fields.Boolean()
+    startDate = fields.DateTime()
+    endDate = fields.DateTime()
+
+
+class SkillSchema(SQLAlchemySchema):
+    class Meta:
+        model = Skill
+        load_instance = True
+
+    id = fields.Integer()
+    idUser = fields.Integer()
+    createdAt = fields.DateTime()
+
+
+class SkillDetailSchema(SQLAlchemySchema):
+    class Meta:
+        model = Skill
+        load_instance = True
+
+    skill = fields.String()
+    level = fields.Integer()
+    experience = fields.String()
+
+
+class EducationSchema(SQLAlchemySchema):
+    class Meta:
+        model = Education
+        load_instance = True
+
+    id = fields.Integer()
+    idUser = fields.Integer()
+    createdAt = fields.DateTime()
+
+
+class EducationDetailSchema(SQLAlchemySchema):
+    class Meta:
+        model = Education
+        load_instance = True
+
+    typeEducation = fields.String()
+    level = fields.String()
+    title = fields.String()
+    grade = fields.Boolean()
+    institution = fields.String()
+    startDate = fields.DateTime()
+    endDate = fields.DateTime()

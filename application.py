@@ -5,6 +5,8 @@ from flask_jwt_extended import JWTManager
 from src.models import db
 from src.views import VistaPong, VistaPersonal
 from src.views import VistaWorkExperience
+from src.views import VistaSkill
+from src.views import VistaEducation
 
 application = create_app('default')
 app_context = application.app_context()
@@ -16,8 +18,10 @@ db.create_all()
 cors = CORS(application)
 
 api = Api(application)
-api.add_resource(VistaWorkExperience, '/aspirant/work')
-api.add_resource(VistaPersonal, '/aspirant/personal')
+api.add_resource(VistaWorkExperience, '/aspirant/work/<int:idUser>')
+api.add_resource(VistaEducation, '/aspirant/education/<int:idUser>')
+api.add_resource(VistaPersonal, '/aspirant/personal/<int:idUser>')
+api.add_resource(VistaSkill, '/aspirant/skill/<int:idUser>')
 api.add_resource(VistaPong, '/')
 
 jwt = JWTManager(application)
@@ -29,4 +33,4 @@ def page_not_found(e):
 
 
 if __name__ == "__main__":
-    application.run(host="0.0.0.0", port=3002)
+    application.run(host="0.0.0.0", port=3002, debug=True)
