@@ -7,6 +7,7 @@ from src.views import VistaPong, VistaPersonal
 from src.views import VistaWorkExperience
 from src.views import VistaSkill
 from src.views import VistaEducation
+from src.views import VistaBusquedaAspirante, VistaBusquedaSkill
 
 application = create_app('default')
 app_context = application.app_context()
@@ -23,6 +24,9 @@ api.add_resource(VistaEducation, '/aspirant/education/<int:idUser>')
 api.add_resource(VistaPersonal, '/aspirant/personal/<int:idUser>')
 api.add_resource(VistaSkill, '/aspirant/skill/<int:idUser>')
 api.add_resource(VistaPong, '/')
+
+api.add_resource(VistaBusquedaAspirante, '/aspirant/<int:idUser>')
+api.add_resource(VistaBusquedaSkill, '/aspirant/<string:Skill_search>')
 
 jwt = JWTManager(application)
 

@@ -109,7 +109,7 @@ class TestPersonalInformation(TestCase):
 
     def test_fail_page(self):
 
-        endpoint_usuario = "/aspirant/fail"
+        endpoint_usuario = "/fail"
         headers = {'Content-Type': 'application/json'}
 
         sol_logUser = self.client.get(endpoint_usuario,
