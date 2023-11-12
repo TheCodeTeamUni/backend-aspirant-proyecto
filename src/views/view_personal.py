@@ -6,6 +6,7 @@ from ..models import db, PersonalInformation, PersonalSchema, PersonalDetailSche
 personal_schema = PersonalSchema()
 personal_detail_schema = PersonalDetailSchema()
 
+
 class VistaPersonal(Resource):
 
     def post(self, idUser):
@@ -45,4 +46,4 @@ class VistaPong(Resource):
 
     def get(self):
         # Retorna pong si el servicio se encuentra en linea: /
-        return 'pong aspirantes V2.0', 200
+        return 'pong aspirantes V2.1', 200
