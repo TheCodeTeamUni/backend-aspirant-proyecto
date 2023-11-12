@@ -87,6 +87,20 @@ class PersonalDetailSchema(SQLAlchemySchema):
     photo = fields.String()
 
 
+class PersonalDetailSchema2(SQLAlchemySchema):
+
+    class Meta:
+        model = PersonalInformation
+        load_instance = True
+
+    idUser = fields.Integer()
+    name = fields.String()
+    lastName = fields.String()
+    country = fields.String()
+    telephone = fields.String()
+    alterntiveEmail = fields.String()
+
+
 class WorkExperienceSchema(SQLAlchemySchema):
     class Meta:
         model = WorkExperience
