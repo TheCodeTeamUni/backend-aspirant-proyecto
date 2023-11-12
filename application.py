@@ -26,7 +26,7 @@ api.add_resource(VistaSkill, '/aspirant/skill/<int:idUser>')
 api.add_resource(VistaPong, '/')
 
 api.add_resource(VistaBusquedaAspirante, '/aspirant/<int:idUser>')
-api.add_resource(VistaBusquedaSkill, '/aspirant/<string:Skill>')
+api.add_resource(VistaBusquedaSkill, '/aspirant/<string:Skill_search>')
 
 jwt = JWTManager(application)
 

@@ -2,8 +2,9 @@ from datetime import datetime
 from flask_restful import Resource
 from flask import request
 from ..models import db, PersonalInformation, PersonalDetailSchema, Education, EducationDetailSchema, \
-    WorkExperience, WorkExperienceDetailSchema, Skill, SkillDetailSchema
+    WorkExperience, WorkExperienceDetailSchema, Skill, SkillDetailSchema, PersonalDetailSchema2
 
+personal_detail_schema_search = PersonalDetailSchema2()
 personal_detail_schema = PersonalDetailSchema()
 education_detail_schema = EducationDetailSchema()
 work_experience_detail_schema = WorkExperienceDetailSchema()
@@ -12,18 +13,33 @@ skill_detail_schema = SkillDetailSchema()
 
 class VistaBusquedaSkill(Resource):
 
-    def get(self, Skill):
+    def get(self, Skill_search):
         # Retorna la información de un aspirante si tiene ciertas habilidades: /aspirant/<string:Skill>
 
         try:
-            sql_query = "SELECT DISTINCT \
-                p.idUser, name, lastName, skill, country, telephone, alterntiveEmail \
-                FROM personal_information AS p \
-                LEFT JOIN skill s ON s.idUser = p.idUser \
-                WHERE s.skill  = :Skill"
-            result = db.session.execute(sql_query, {'Skill': Skill})
 
-            return [dict(row) for row in result], 200
+            query = db.session.query(PersonalInformation, Skill).join(
+                Skill, PersonalInformation.idUser == Skill.idUser).filter(Skill.skill == Skill_search).all()
+
+            data = []
+
+            for row in query:
+                personal = personal_detail_schema_search.dump(row[0])
+                skill = skill_detail_schema.dump(row[1])
+
+                data_aspirante = {
+                    "idUser": personal['idUser'],
+                    "name": personal['name'],
+                    "lastName": personal['lastName'],
+                    "skill": skill['skill'],
+                    "country": personal['country'],
+                    "telephone": personal['telephone'],
+                    "alterntiveEmail": personal['alterntiveEmail']
+                }
+
+                data.append(data_aspirante)
+
+            return data, 200
 
         except Exception as error:
             return {'error': str(error)}, 400
