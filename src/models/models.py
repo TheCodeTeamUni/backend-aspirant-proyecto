@@ -99,6 +99,7 @@ class PersonalDetailSchema2(SQLAlchemySchema):
     country = fields.String()
     telephone = fields.String()
     alterntiveEmail = fields.String()
+    photo = fields.String()
 
 
 class WorkExperienceSchema(SQLAlchemySchema):

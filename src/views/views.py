@@ -32,9 +32,11 @@ class VistaBusquedaSkill(Resource):
                     "name": personal['name'],
                     "lastName": personal['lastName'],
                     "skill": skill['skill'],
+                    "level": skill['level'],
                     "country": personal['country'],
                     "telephone": personal['telephone'],
-                    "alterntiveEmail": personal['alterntiveEmail']
+                    "alterntiveEmail": personal['alterntiveEmail'],
+                    "photo": personal['photo']
                 }
 
                 data.append(data_aspirante)
