@@ -1,8 +1,6 @@
-import json
 from unittest import TestCase
 from faker import Faker
 from application import application as app
-from src.models import PersonalInformation, db
 
 
 class TestPersonalInformation(TestCase):
@@ -19,4 +17,9 @@ class TestPersonalInformation(TestCase):
     def test_get_aspirant(self):
         response = self.client.get(
             "/aspirant/1", headers={"Content-Type": "application/json"})
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_aspirants(self):
+        response = self.client.get(
+            "/aspirant", headers={"Content-Type": "application/json"})
         self.assertEqual(response.status_code, 200)
