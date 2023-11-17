@@ -88,3 +88,21 @@ class VistaBusquedaAspirante(Resource):
 
         except Exception as error:
             return {'error': str(error)}, 400
+
+
+class VistaAspirantes(Resource):
+
+    def get(self):
+        # Retorna la información de todos los aspirantes: /aspirant
+
+        try:
+            # Get personal information
+            personal = PersonalInformation.query.all()
+
+            personal_detail = [
+                personal_detail_schema_search.dump(al) for al in personal]
+
+            return personal_detail, 200
+
+        except Exception as error:
+            return {'error': str(error)}, 400
